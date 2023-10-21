@@ -11,19 +11,20 @@ class Triangulo:
         self.__B = lados[1]
         self.__C = lados[2]
         self.eTriangulo = self.isTriangulo()
+        self.tipoTriangulo = self.QualTipoTriangulo()
         pass
 
     def isTriangulo(self) -> bool:
-        if self.__A + self.__B <= self.__C or self.__A + self.__C <= self.__B or self.__B + self.__C <= self.__A:
+        if self.__A + self.__B > self.__C or self.__A + self.__C > self.__B or self.__B + self.__C > self.__A:
             return True
         else:
             return False
         
-    def tipoTriangulo(self) -> str:
-        if(self.__A == self.__B or self.__A == self.__C):
+    def QualTipoTriangulo(self) -> str:
+        if(self.__A == self.__B and self.__A == self.__C):
             return "Equilátero"
         
-        if( (self.__A == self.__B and self.__A != self.__C) or (self.__B == self.__C or self.__A != self.__C) or (self.__A == self.__C or self.__A != self.__B) ):
+        if( (self.__A == self.__B and self.__A != self.__C) or (self.__A == self.__C and self.__A != self.__B) or (self.__B == self.__C and self.__A != self.__B) ):
             return "Isósceles"
 
         if(self.__A != self.__B and self.__A != self.__C and self.__B != self.__C):
@@ -34,14 +35,14 @@ class Triangulo:
 
         if(self.eTriangulo):
             text = text + f"Esses numeros formão um triângulo.\n"
+            text = text + f"Esse triangulo e {self.tipoTriangulo}"
         else:
             text = text + f"Esses numeros Não formão um triângulo.\n"
         
+        
         return text
 
-# Exemplos de uso
-
-lados = [6,8,10]
+lados = [5,8,8]
 
 t2 = Triangulo(lados)
 print(t2)
