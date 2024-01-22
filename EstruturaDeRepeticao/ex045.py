@@ -3,10 +3,11 @@
 # Total de Alunos que utilizaram o sistema;
 # A Média das Notas da Turma.
 # Gabarito da Prova:
+# Após concluir isto você poderia incrementar o programa permitindo que o professor digite o gabarito da prova antes dos alunos usarem o programa.
 
 QUANTIDADE_NOTAS = 10
 OPISOES_NOTA = ["A","B","C","D","E"]
-GABARITO = ["A","B","C","D","B","B","C","D","E","A"]
+gabarito = ["A","B","C","D","B","B","C","D","E","A"]
 
 class Estudante:
     def __init__(self,respostas:list[str]) -> None:
@@ -16,7 +17,7 @@ class Estudante:
 
     def resultado(self):
         for indice,questao in enumerate(self.respostas):
-            if GABARITO[indice] == questao:
+            if gabarito[indice] == questao:
                 self.nota += 1
         
 alunos:list[Estudante] = []
@@ -26,15 +27,54 @@ denovo = False
 continuar = True
 contador = 0
 
+
 while continuar:
+    fazer_gabarito = input("Deseja Fazer o gabarito? ").upper()
+    if fazer_gabarito in "S":
+        continuar = False
+        fazer_gabarito = True
+        gabarito.clear()
+        break
+    elif fazer_gabarito in "N":
+        continuar = False
+        fazer_gabarito = False
+        break
+    else:
+        print("Digite apenas S ou N.")
+
+continuar = True
+
+while fazer_gabarito:
     try:
-        
         while contador < 10:
             if denovo:
-                questao[contador] = input(f"Digite a nota {contador+1} ").upper()
+                gabarito[contador] = input(f"Digite o gabarito da questão {contador+1} ").upper()
             else:
                 denovo = True
-                questao.append(input(f"Digite a nota {contador+1} ").upper())
+                gabarito.append(input(f"Digite o gabarito da questão {contador+1} ").upper())
+            if gabarito[contador] in OPISOES_NOTA:
+                contador += 1
+                denovo = False
+            else:
+                print(f"Digite apenas as opções {OPISOES_NOTA}") 
+
+    except:
+        print(f"Digite apenas as opções {OPISOES_NOTA}")
+
+    if contador == 10:
+        break
+
+contador = 0
+
+print("Digite a resposta dos alunos")
+while continuar:
+    try:
+        while contador < 10:
+            if denovo:
+                questao[contador] = input(f"Digite a resposta da questão {contador+1} ").upper()
+            else:
+                denovo = True
+                questao.append(input(f"Digite a resposta da questão {contador+1} ").upper())
             if questao[contador] in OPISOES_NOTA:
                 contador += 1
                 denovo = False
@@ -74,4 +114,4 @@ nota_media = total_notas/QUANTIDADE_NOTAS
 print(f"Maior nota: {alunos[maior].nota}")
 print(f"Menor nota: {alunos[menor].nota}")
 print(f"quantidade de alunos {len(alunos)}")
-print(f"Gabarito: {GABARITO}")
+print(f"Gabarito: {gabarito}")
