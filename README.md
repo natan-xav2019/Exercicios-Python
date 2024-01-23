@@ -16,7 +16,7 @@ env\Scripts\activate
 ---
 - [x] [EstruturaSequencial](https://wiki.python.org.br/EstruturaSequencial)
 - [X] [EstruturaDeDecisao](https://wiki.python.org.br/EstruturaDeDecisao)
-- [ ] [EstruturaDeRepeticao](https://wiki.python.org.br/EstruturaDeRepeticao)
+- [X] [EstruturaDeRepeticao](https://wiki.python.org.br/EstruturaDeRepeticao)
 - [ ] [ExerciciosListas](https://wiki.python.org.br/ExerciciosListas)
 - [ ] [ExerciciosFuncoes](https://wiki.python.org.br/ExerciciosFuncoes)
 - [ ] [ExerciciosComStrings](https://wiki.python.org.br/ExerciciosComStrings)
