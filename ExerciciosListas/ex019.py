@@ -54,7 +54,7 @@ class SistemaOperacional:
 def apurasao_votos_indice(quantidade_votos:int,sistemas:list[SistemaOperacional]):
     for sistema in sistemas:
         if sistema.getVoto() == quantidade_votos:
-            return sistema.getId()+1
+            return sistema.getId()-1
 
 sistema_operacional = ["Windows Server","Unix","Linux","Netware","Mac Os","Outro"]
 
@@ -62,9 +62,6 @@ sistemas:list[SistemaOperacional] = []
 
 for index,nome in enumerate(sistema_operacional):
     sistemas.append(SistemaOperacional(index+1,nome))
-
-for sistema in sistemas:
-    print(f"id:{sistema.id} nome: {sistema.getNome()}")
 
 while True:
     try:
@@ -89,6 +86,7 @@ for sistema in sistemas:
     if(sistema.getVoto()):
         print(sistema)
 print("-------------------     -----")
-print(f"Total                     {tecnologia_vencedora}")
+print(f"Total                     {total_votos}")
 
 
+print(f"O Sistema Operacional mais votado foi o {sistemas[vencedor].getNome()}, com {sistemas[vencedor].getVoto()} votos, correspondendo a {sistemas[vencedor].getPorcento()} dos votos.")
