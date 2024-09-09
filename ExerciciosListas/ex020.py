@@ -27,11 +27,70 @@
 # Total gasto com abonos: R$ 1400.00
 # Valor mínimo pago a 3 colaboradores
 # Maior valor de abono pago: R$ 900.00
+import locale
+from statistics import mean
+
+locale.setlocale(locale.LC_ALL,"pt_BR")
 
 ABONO_PORCENTO = 0.2
 ABONO_MINIMO = 100
 
-class funcionario:
+class Funcionario:
     def __init__(self) -> None:
+        self._salario:float = 0
+        self._abono:float = 0
+
+    @property
+    def salario(self):
+        return self._salario
+    
+    @property
+    def abono(self):
+        return self._abono
+
+    @salario.setter
+    def salario(self, salario):
+        self._salario = salario
+        self._abono = self.calculoAbono()
+
+    def calculoAbono(self) -> float: 
+        abonoCalculo = self._salario * ABONO_PORCENTO
+
+        if abonoCalculo < ABONO_MINIMO:
+            return ABONO_MINIMO
         
+        return abonoCalculo
+
+funcionarios:list[Funcionario] = []
+quantidade_abonos = 0
+
+while True:
+    try:
+        salario = input('Salário: ')
+        salario = int(salario)
+        if salario == 0:
+            break
+        elif salario > 0:
+            funcionarios.append(Funcionario())
+            funcionarios[len(funcionarios) - 1].salario = salario
+    except:
+        print("Entrada inválida. Informe um valor numérico.")
+
+todos_abono = [funcionario.abono for funcionario in funcionarios]
+
+quantidade_funcionarios = len(funcionarios)
+maior = max(todos_abono)
+soma = sum(todos_abono)
+media = mean(todos_abono)
+
+print(f"Salário    - Abono")
+for funcionario in funcionarios:
+    print(f"{locale.currency(funcionario.salario):10} - {locale.currency(funcionario.abono):10}")
+    if (funcionario.abono == ABONO_MINIMO):
+        quantidade_abonos += 1
+
+print(f"\nForam processados {quantidade_funcionarios} colaboradores")
+print(f"Total gasto com abonos: {locale.currency(soma)}")
+print(f"Valor mínimo pago a {quantidade_abonos} colaboradores")
+print(f"Maior valor de abono pago: {locale.currency(maior)}")
         
